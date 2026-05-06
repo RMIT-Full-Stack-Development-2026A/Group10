@@ -1,24 +1,37 @@
-/* src/index.css */
+@import "tailwindcss";
 
-/* Define Global Variables */
-:root {
-  --primary-color: #4CAF50;
-  --secondary-color: #2196F3;
-  --background-color: #f4f4f9;
-  --text-color: #333;
-  --error-color: #f44336;
-  --border-radius: 8px;
+@theme {
+  --color-smoke-text: #E2E1F5;
+  --color-secondary-text: #CDC2D7;
+  --color-ghost-text: #4B4455;
+  --color-dark-bg: #111220;
+  --color-black-bg: #0C0D1B;
+  --color-box-bg: #333443;
+  --color-player-bg: #191A29;
+  --color-background: #1A1B2A;
+  --color-dark-purple: #420089;
+  --color-purple: #7421DC;
+  --color-pink: #D6BAFF;
+  --color-yellow: #FFBA4B;
+  --color-draw: #0984e3;
+  --color-ghost-text: #968DA1;
+  --color-ghost-bg: rgba(255,255,255,0.03);
 }
 
+@custom-variant hoverable (@media (hover: hover));
+@custom-variant portrait (@media (orientation: portrait));
+@custom-variant dt (@media (min-aspect-ratio: 14/9) and (orientation: landscape));
+@custom-variant lt (@media (max-aspect-ratio: 14/9) and (orientation: landscape));
+@custom-variant pt (@media (min-aspect-ratio: 9/14) and (orientation: portrait));
+@custom-variant mb (@media (max-aspect-ratio: 9/14) and (orientation: portrait));
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background-color: var(--color-dark-bg);
 }
