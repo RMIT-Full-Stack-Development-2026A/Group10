@@ -1,6 +1,6 @@
 // src/components/Auth/useLoginForm.js
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // 1. Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import { httpHelper } from '../../utils/httpHelper';
 
 export const useLoginForm = () => {
@@ -11,7 +11,7 @@ export const useLoginForm = () => {
 
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate(); // 2. Initialize the navigate function
+    const navigate = useNavigate(); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
