@@ -1,6 +1,7 @@
 // src/components/Auth/useLoginForm.js
 import { useState } from 'react';
-import { httpHelper } from '../../utils/httpHelper'; // Prepared for future API calls
+import { httpHelper } from '../../utils/httpHelper';
+import { useNavigate } from "react-router-dom"; // Prepared for future API calls
 
 export const useLoginForm = () => {
     const [credentials, setCredentials] = useState({
@@ -10,6 +11,7 @@ export const useLoginForm = () => {
 
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,16 +31,15 @@ export const useLoginForm = () => {
 
         setIsLoading(true);
         console.log("Ready to send login request:", credentials);
-        
-        // TODO: We will use httpHelper here later to send data to the Backend
-        // Example: const response = await httpHelper('/api/auth/login', 'POST', credentials);
-        // If the Backend returns an error (e.g., 5 failed attempts), we use: setError(response.error);
 
-        // Simulate API loading time for now
+        // Simulate API loading time
         setTimeout(() => {
             setIsLoading(false);
-            // Simulate an error so you can test the UI warning banner
-            // setError('Invalid credentials or account locked.'); 
+
+            // 3. Navigate to the profile page upon "success"
+            console.log("Login simulated successfully. Redirecting to Profile...");
+            navigate('/profile');
+
         }, 1000);
     };
 
