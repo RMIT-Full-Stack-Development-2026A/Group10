@@ -1,7 +1,6 @@
-// src/App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage'; // Import trang Đăng ký vào
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (

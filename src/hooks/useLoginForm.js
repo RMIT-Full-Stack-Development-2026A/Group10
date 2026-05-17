@@ -1,6 +1,6 @@
 // src/components/Auth/useLoginForm.js
 import { useState } from 'react';
-import { httpHelper } from '../../utils/httpHelper';
+import { httpHelper } from '../utils/httpHelper';
 import { useNavigate } from "react-router-dom"; // Prepared for future API calls
 
 export const useLoginForm = () => {

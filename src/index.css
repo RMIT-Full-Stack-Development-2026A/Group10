@@ -1,7 +1,7 @@
 /* src/index.css */
 
 /* Define Global Variables */
-:root {
+/* :root {
   --primary-color: #4CAF50;
   --secondary-color: #2196F3;
   --background-color: #f4f4f9;
@@ -21,4 +21,6 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
-}
+} */
+
+@import "tailwindcss";
