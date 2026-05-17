@@ -1,0 +1,109 @@
+.profile-sub-card {
+    padding: 1.5rem;
+    max-width: 28rem;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Vertical spacing between child blocks */
+.profile-sub-card > * + * {
+    margin-top: 1.5rem;
+}
+
+.sub-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.5rem 0;
+}
+
+.sub-section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 0.5rem 0;
+}
+
+.sub-text {
+    color: #4b5563;
+    margin: 0 0 0.5rem 0;
+}
+
+/* Status Badges */
+.sub-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.sub-badge-premium {
+    background-color: #bbf7d0;
+    color: #166534;
+}
+
+.sub-badge-standard {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* Section Divider */
+.sub-section {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1rem;
+}
+
+/* Button Layouts */
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-sub {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-sub:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Button Variants */
+.btn-wallet-deposit {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.btn-wallet-deposit:hover:not(:disabled) {
+    background-color: #bfdbfe;
+}
+
+.btn-wallet-pay {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.btn-wallet-pay:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+.btn-stripe {
+    width: 100%;
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+.btn-stripe:hover:not(:disabled) {
+    background-color: #4338ca;
+}
