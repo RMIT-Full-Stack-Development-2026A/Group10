@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 
-import Sidebar from '@/components/SideBar'
-import MiniBoard from '@/components/MiniBoard'
-import Header from '@/components/Header'
+import Sidebar from '../components/Frontend/SideBar'
+import MiniBoard from '../components/Frontend/MiniBoard'
+import Header from '../components/Frontend/Header'
 import { clearAuthUser, getStoredAuthUser } from '@/utils/auth'
 
 const HomePage = () => {

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Sidebar from '@/components/SideBar'
-import Header from '@/components/Header'
-import GameBoard from '@/components/GameBoard'
-import GameControls from '@/components/GameControls'
-import { useCaroGame } from '@/hooks/useCaroGame'
+import Sidebar from '../components/Frontend/SideBar'
+import Header from '../components/Frontend/Header'
+import GameBoard from '../components/Game/GameBoard.jsx'
+import GameControls from '../components/Game/GameControls.jsx'
+import { useGameLogic } from '../hooks/useGameLogic.js'
 import { clearAuthUser, getStoredAuthUser } from '@/utils/auth'
 
 const GamePage = () => {
@@ -23,7 +23,7 @@ const GamePage = () => {
         resetGame,
         undoMove,
         declareDraw,
-    } = useCaroGame()
+    } = useGameLogic()
 
     const handleLogout = () => {
         clearAuthUser()
