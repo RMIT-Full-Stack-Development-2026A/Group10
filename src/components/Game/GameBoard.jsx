@@ -10,7 +10,8 @@ const GameBoard = () => {
     } = useGameLogic();
 
     return (
-        <div className="max-w-md mx-auto my-10 p-6 bg-white rounded-xl shadow-md border border-gray-100 font-sans flex flex-col items-center">
+        /* Expanded container max-width to 'max-w-2xl' to comfortably hold 10 columns */
+        <div className="max-w-2xl mx-auto my-10 p-6 bg-white rounded-xl shadow-md border border-gray-100 font-sans flex flex-col items-center">
             <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 text-center sm:text-left">
                 {winner ? (
                     <h2 className="text-xl font-bold text-green-600 animate-pulse">
@@ -32,14 +33,17 @@ const GameBoard = () => {
                 </button>
             </div>
 
-            {/* Responsive 3x3 Tic-Tac-Toe Grid Layout */}
-            <div className="grid grid-cols-3 gap-2 bg-gray-100 p-2 rounded-xl shadow-inner">
+            {/* Changed from grid-cols-3 to grid-cols-10 and tight gap-1 for grid layout */}
+            <div className="grid grid-cols-10 gap-1 bg-gray-100 p-2 rounded-xl shadow-inner w-full justify-center">
                 {board.map((row, rowIndex) => (
                     row.map((cell, colIndex) => (
                         <div
                             key={`${rowIndex}-${colIndex}`}
                             onClick={() => handleCellClick(rowIndex, colIndex)}
-                            className={`w-24 h-24 bg-white flex items-center justify-center text-3xl font-extrabold rounded-lg shadow-sm select-none transition-all duration-150 border border-gray-200/60
+                            /* - Changed w-24 h-24 to fluid sizing (w-8 h-8 mobile, w-12 h-12 desktop)
+                              - Reduced text tracking size to text-xl so X and O sit perfectly
+                            */
+                            className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-white flex items-center justify-center text-xl font-extrabold rounded-md shadow-sm select-none transition-all duration-150 border border-gray-200/60
                                 ${cell ? 'bg-gray-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-50 active:scale-95'}
                                 ${cell === playerOneMarker ? 'text-blue-600' : 'text-red-600'}
                             `}

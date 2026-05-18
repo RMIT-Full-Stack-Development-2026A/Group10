@@ -4,6 +4,8 @@
     /* Replace these hex codes with your preferred neon theme colors */
     --color-pink: #ff2a74;
     --color-yellow: #ffdf00;
+    --color-blue: #0000FF;
+    --color-red: #ff0000;
     --color-background: #0d0e12;
     --color-smoke-text: #94a3b8;
 }
