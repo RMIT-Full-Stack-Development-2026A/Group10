@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Frontend/SideBar'
 import MiniBoard from '../components/Frontend/MiniBoard'
 import Header from '../components/Frontend/Header'
-import { clearAuthUser, getStoredAuthUser } from '@/utils/auth'
+import { clearAuthUser, getStoredAuthUser } from '../utils/Auth'
 
 const HomePage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)

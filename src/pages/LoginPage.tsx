@@ -3,7 +3,7 @@ import { faGamepad, faXmark, faO } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { FormInput } from '../components/Frontend/FormInput'
 import FormBtn from '../components/Frontend/FormBtn'
-import { useLoginForm } from '@/hooks/useLoginForm'
+import { useLoginForm } from '../hooks/useLoginForm.js'
 
 const LoginPage = () => {
     const {
@@ -45,7 +45,7 @@ const LoginPage = () => {
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="w-full flex flex-col gap-[2vh]">
+                <form onSubmit={handleSubmit} className="w-full flex flex-col gap-[2vh] text-white">
 
                     <FormInput
                         label="Username or Email"
@@ -53,16 +53,16 @@ const LoginPage = () => {
                         placeholder="Enter username or email"
                         value={credentials.identifier}
                         onChange={(v) => updateField('identifier', v)}
-                        error={errors.identifier}
+                        error={errors?.identifier}
                     />
 
-                    <FormInput
+                    <FormInput className="text-white"
                         label="Password"
                         type="password"
                         placeholder="Enter your password"
                         value={credentials.password}
                         onChange={(v) => updateField('password', v)}
-                        error={errors.password}
+                        error={errors?.password}
                     />
 
                     <FormBtn type="submit">

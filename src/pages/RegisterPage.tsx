@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGamepad, faXmark, faO } from '@fortawesome/free-solid-svg-icons'
-import { FormSelect, FormInput } from '@/components/FormInput'
+import { FormSelect, FormInput } from '../components/Frontend/FormInput'
 import FormBtn from '../components/Frontend/FormBtn'
 import { Link } from 'react-router-dom'
-import { useRegisterForm } from '@/hooks/useRegisterForm'
+import { useRegisterForm } from '../hooks/useRegisterForm.js'
 
 const countries = [
     'Vietnam',

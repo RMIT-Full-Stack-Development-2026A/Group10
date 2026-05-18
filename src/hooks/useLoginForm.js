@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { httpHelper } from '../utils/httpHelper';
 import { useNavigate } from "react-router-dom"; // Prepared for future API calls
 
+// Define the shape of your state for type safety
+
+
 export const useLoginForm = () => {
+
     const [credentials, setCredentials] = useState({
         identifier: '', // Can be either Username or Email
         password: ''
@@ -13,11 +17,20 @@ export const useLoginForm = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCredentials(prev => ({ ...prev, [name]: value }));
-        // Clear the error message as soon as the user starts typing again
-        if (error) setError(''); 
+    const updateField = (field, value) => {
+        // 1. Update the credential value (identifier or password)
+        setCredentials((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+
+        // 2. Clear field-specific error if it exists so the red border disappears while typing
+        if (error && error[field]) {
+            setError((prev) => ({
+                ...prev,
+                [field]: undefined,
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -38,10 +51,10 @@ export const useLoginForm = () => {
 
             // 3. Navigate to the profile page upon "success"
             console.log("Login simulated successfully. Redirecting to Profile...");
-            navigate('/profile');
+            navigate('/');
 
         }, 1000);
     };
 
-    return { credentials, error, isLoading, handleChange, handleSubmit };
+    return { credentials, error, isLoading, updateField, handleSubmit };
 };

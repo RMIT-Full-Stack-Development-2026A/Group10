@@ -1,26 +1,9 @@
-/* src/index.css */
-
-/* Define Global Variables */
-/* :root {
-  --primary-color: #4CAF50;
-  --secondary-color: #2196F3;
-  --background-color: #f4f4f9;
-  --text-color: #333;
-  --error-color: #f44336;
-  --border-radius: 8px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
-} */
-
 @import "tailwindcss";
+
+@theme {
+    /* Replace these hex codes with your preferred neon theme colors */
+    --color-pink: #ff2a74;
+    --color-yellow: #ffdf00;
+    --color-background: #0d0e12;
+    --color-smoke-text: #94a3b8;
+}

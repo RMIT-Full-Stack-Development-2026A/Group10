@@ -49,13 +49,21 @@ export const useRegisterForm = () => {
         return errorMsg;
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-        
-        // Real-time validation
-        const error = validateField(name, value);
-        setErrors(prev => ({ ...prev, [name]: error }));
+    // Inside your useRegisterForm hook:
+    const setField = (field, value) => {
+        // 1. Update the form data value dynamically
+        setFormData((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+
+        // 2. Clear field-specific error if it exists
+        if (errors && errors[field]) {
+            setErrors((prev) => ({
+                ...prev,
+                [field]: undefined,
+            }));
+        }
     };
 
     const handleSubmit = (e) => {
@@ -81,5 +89,5 @@ export const useRegisterForm = () => {
         }
     };
 
-    return { formData, errors, handleChange, handleSubmit };
+    return { formData, errors, setField, handleSubmit };
 };

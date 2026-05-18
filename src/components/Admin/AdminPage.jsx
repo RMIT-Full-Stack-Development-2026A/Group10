@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const AdminDashboard = () => {
+const AdminPage = () => {
     const [players, setPlayers] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -87,4 +87,4 @@ const AdminDashboard = () => {
     );
 };
 
-export default AdminDashboard;
+export default AdminPage;

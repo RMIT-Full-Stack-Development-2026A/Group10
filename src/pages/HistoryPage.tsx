@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Sidebar from '@/components/SideBar'
-import Header from '@/components/Header'
-import HistoryList from '@/components/HistoryList'
-import { clearAuthUser, getStoredAuthUser } from '@/utils/auth'
+import Sidebar from '../components/Frontend/SideBar'
+import Header from '../components/Frontend/Header'
+import HistoryList from '../components/Frontend/HistoryList'
+import { clearAuthUser, getStoredAuthUser } from '../utils/Auth'
 
 const HistoryPage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)

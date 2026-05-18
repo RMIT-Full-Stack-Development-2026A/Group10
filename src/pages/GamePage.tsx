@@ -6,7 +6,7 @@ import Header from '../components/Frontend/Header'
 import GameBoard from '../components/Game/GameBoard.jsx'
 import GameControls from '../components/Game/GameControls.jsx'
 import { useGameLogic } from '../hooks/useGameLogic.js'
-import { clearAuthUser, getStoredAuthUser } from '@/utils/auth'
+import { clearAuthUser, getStoredAuthUser } from '../utils/Auth'
 
 const GamePage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
