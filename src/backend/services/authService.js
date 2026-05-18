@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const PlayerRepository = require('../repositories/playerRepository');
+import bcrypt from 'bcryptjs';
+import PlayerRepository from '../repositories/playerRepository.js'; // Assuming repository is refactored to ES6
 
 class AuthService {
     async register(userData) {
@@ -7,50 +7,39 @@ class AuthService {
         const existingUser = await PlayerRepository.findByEmail(userData.email);
         if (existingUser) throw new Error('Email already registered');
 
-        // 2. Hash the password (req 1.1.3)
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(userData.password, salt);
-
-        // 3. Create the player
-        return await PlayerRepository.create({
-            ...userData,
-            password: hashedPassword
-        });
+        // 2. Simply pass the raw data!
+        // playerModel.js's pre-save middleware will automatically hash the password cleanly.
+        return await PlayerRepository.create(userData);
     }
 
     async login(userData) {
         const { identifier, password } = userData;
         let existingUser = null;
 
-        // 1. Check if username OR email (identifier) matches an existing user
-        // We can distinguish them by checking if the identifier looks like an email
         const isEmail = identifier.includes('@');
-
         if (isEmail) {
             existingUser = await PlayerRepository.findByEmail(identifier);
         } else {
-            // Assuming your repository has a findByUsername method
             existingUser = await PlayerRepository.findByUsername(identifier);
         }
 
-        // If no user is found, throw a generic error to prevent user enumeration
         if (!existingUser) {
-            throw new Error("User not found. Wrong username?");
+            throw new Error("Invalid username or email.");
         }
 
-        // 2. Compare passwords
-        // bcrypt.compare automatically handles hashing the incoming plaintext password
-        // with the salt stored inside the existing hash before comparing them.
-        const isMatch = await bcrypt.compare(password, existingUser.password);
+        // Check if account is active before doing password heavy-lifting
+        if (existingUser.accountStatus === 'Deactivated') {
+            throw new Error("Account has been deactivated. Please contact administration.");
+        }
 
+        // 3. Leverage the helper method you already built on the model!
+        const isMatch = await existingUser.matchPassword(password);
         if (!isMatch) {
             throw new Error('Invalid password');
         }
 
-        // Login successful.
-        // Typically, you would generate and return a JWT or session object here.
         return existingUser;
     }
 }
 
-module.exports = AuthService;
+export default AuthService;

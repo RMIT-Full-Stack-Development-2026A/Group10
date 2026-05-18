@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const playerSchema = new mongoose.Schema({
     // 1. Identity & Profile
@@ -55,4 +56,20 @@ const playerSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
+playerSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
+// Helper Method: Compares entered login password with hashed DB password
+playerSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
 export default mongoose.model('Player', playerSchema);

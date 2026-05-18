@@ -48,7 +48,7 @@ const RegisterPage = () => {
                     </p>
                 </div>
 
-                <div className="w-full flex flex-col gap-[2vh] portrait:gap-[4vh]">
+                <div className="w-full flex flex-col gap-[2vh] portrait:gap-[4vh] text-white">
                     <FormInput
                         label="Username"
                         type="text"
@@ -75,7 +75,7 @@ const RegisterPage = () => {
                         error={errors.country}
                     />
 
-                    <div className="w-full flex gap-[2vw] portrait:gap-[4vh] justify-between flex-row portrait:flex-col">
+                    <div className="w-full flex gap-[2vw] portrait:gap-[4vh] justify-between flex-row portrait:flex-col text-white">
                         <FormInput
                             label="Password"
                             type="password"
