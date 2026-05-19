@@ -45,7 +45,8 @@ const GamePage = () => {
             <GameBoard 
                 onStartOnline={handleFindMatch} 
                 isSearching={isSearching} 
-                matchData={matchData} 
+                matchData={matchData}
+                socket={socket}
             />
         </div>
     );

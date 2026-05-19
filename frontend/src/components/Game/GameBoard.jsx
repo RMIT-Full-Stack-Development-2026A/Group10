@@ -1,17 +1,25 @@
 // src/components/Game/GameBoard.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Select } from '../common/Select';
+import { Button } from '../common/Button';
+import { Card } from '../common/Card';
 import './GameBoard.css';
+import { ChatBox } from './ChatBox';
 import { useGameLogic } from "../../hooks/useGameLogic";
+import { useProfile } from '../../hooks/useProfile';    
 
 const AVAILABLE_MARKERS = ['❌', '⭕', '⚔️', '🛡️', '🚀', '🌟'];
 
-const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
+const GameBoard = ({ onStartOnline, isSearching, matchData, socket }) => {
     const { 
         gameStarted, startGame, boardSize, boardStyle,
         board, isPlayerOneTurn, winner, handleCellClick, resetGame, 
         playerOneMarker, playerTwoMarker, gameMode 
     } = useGameLogic(matchData);
     
+    const navigate = useNavigate();
+    const { profileData } = useProfile();
     const [selectedSize, setSelectedSize] = useState(10);
     const [selectedStyle, setSelectedStyle] = useState('style-classic');
     const [p1Mark, setP1Mark] = useState('⚔️');
@@ -25,92 +33,120 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
         }
     }, [matchData]); 
 
-    if (!gameStarted) {
+        if (!gameStarted) {
+        const modeOptions = [
+            { label: 'Single Player (vs AI)', value: 'Single Player' },
+            { label: 'Two Players (Local)', value: 'Two Players' },
+            { label: 'Online Multiplayer', value: 'Online' }
+        ];
+
+        if (!socket) return;
+        socket.on('gameTerminatedByAdmin', (message) => {
+            alert(`🚨 ${message}`);
+            navigate('/profile');
+            return () => socket.off('gameTerminatedByAdmin');
+    }, [socket, navigate]);
+        
+        const aiOptions = [
+            { label: 'Jeremy (Easy)', value: 'Easy' },
+            { label: 'Bot (Medium)', value: 'Medium' },
+            { label: 'Overlord (Hard)', value: 'Hard' }
+        ];
+
+        const sizeOptions = [
+            { label: '10 x 10', value: 10 },
+            { label: '15 x 15', value: 15 }
+        ];
+
+        const styleOptions = [
+            { label: 'Classic', value: 'style-classic' },
+            { label: 'Neon Dark', value: 'style-dark' },
+            { label: 'Wooden', value: 'style-wood' }
+        ];
+
+        const markerOptions = AVAILABLE_MARKERS.map(m => ({ label: m, value: m }));
+
         return (
             <div className="game-setup-container">
-                <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Match Setup</h2>
-                
-                <div className="setup-group flex-row">
-                    <div style={{ flex: 1 }}>
-                        <label>Game Mode:</label>
-                        <select value={selectedMode} onChange={(e) => setSelectedMode(e.target.value)} disabled={isSearching}>
-                            <option value="Single Player">Single Player (vs AI)</option>
-                            <option value="Two Players">Two Players (Local)</option>
-                            <option value="Online">Online Multiplayer</option>
-                        </select>
+                <Card title="Match Setup" className="card-lg">
+                    
+                    <div className="setup-grid">
+                        <Select 
+                            label="Game Mode" name="mode" 
+                            value={selectedMode} onChange={(e) => setSelectedMode(e.target.value)} 
+                            options={modeOptions} disabled={isSearching} 
+                        />
+                        
+                        {selectedMode === 'Single Player' ? (
+                            <Select 
+                                label="AI Level" name="ai" 
+                                value={selectedDiff} onChange={(e) => setSelectedDiff(e.target.value)} 
+                                options={aiOptions} disabled={isSearching} 
+                            />
+                        ) : (
+                            <div className="empty-grid-slot"></div> 
+                        )}
+
+                        <Select 
+                            label="Board Size" name="size" 
+                            value={selectedSize} onChange={(e) => setSelectedSize(Number(e.target.value))} 
+                            options={sizeOptions} disabled={isSearching} 
+                        />
+
+                        <Select 
+                            label="Board Style" name="style" 
+                            value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)} 
+                            options={styleOptions} disabled={isSearching} 
+                        />
+
+                        <Select 
+                            label="Player 1 Marker" name="p1Mark" 
+                            value={p1Mark} onChange={(e) => setP1Mark(e.target.value)} 
+                            options={markerOptions} disabled={isSearching} 
+                        />
+
+                        <Select 
+                            label="Player 2 / Bot Marker" name="p2Mark" 
+                            value={p2Mark} onChange={(e) => setP2Mark(e.target.value)} 
+                            options={markerOptions} disabled={isSearching} 
+                        />
                     </div>
-                    {selectedMode === 'Single Player' && (
-                        <div style={{ flex: 1 }}>
-                            <label>AI Level:</label>
-                            <select value={selectedDiff} onChange={(e) => setSelectedDiff(e.target.value)} disabled={isSearching}>
-                                <option value="Easy">Jeremy (Easy)</option>
-                                <option value="Medium">Bot (Medium)</option>
-                                <option value="Hard">Overlord (Hard)</option>
-                            </select>
+
+                    {isSearching ? (
+                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                            <div className="spinner" style={{ margin: '0 auto 10px', width: '30px', height: '30px', border: '3px solid #f3f3f3', borderTop: '3px solid #4CAF50', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+                            <p style={{ color: '#4CAF50', fontWeight: 'bold' }}>Searching for an opponent...</p>
+                        </div>
+                    ) : (
+                        <div className="start-btn-container">
+                            <Button 
+                                variant="primary"
+                                style={{ backgroundColor: selectedMode === 'Online' ? '#4CAF50' : '' }}
+                                onClick={() => {
+                                    if (selectedMode === 'Online') {
+                                        onStartOnline(); 
+                                    } else {
+                                        startGame(selectedSize, selectedStyle, p1Mark, p2Mark, selectedMode, selectedDiff);
+                                    }
+                                }}
+                                disabled={p1Mark === p2Mark}
+                            >
+                                {p1Mark === p2Mark ? "Select different markers!" : (selectedMode === 'Online' ? "🌍 Find Online Match" : "Enter Arena")}
+                            </Button>
                         </div>
                     )}
-                </div>
-
-                <div className="setup-group flex-row">
-                    <div style={{ flex: 1 }}>
-                        <label>Board Size:</label>
-                        <select value={selectedSize} onChange={(e) => setSelectedSize(Number(e.target.value))} disabled={isSearching}>
-                            <option value={10}>10 x 10</option>
-                            <option value={15}>15 x 15</option>
-                        </select>
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <label>Board Style:</label>
-                        <select value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)} disabled={isSearching}>
-                            <option value="style-classic">Classic</option>
-                            <option value="style-dark">Neon Dark</option>
-                            <option value="style-wood">Wooden</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className="setup-group flex-row">
-                    <div style={{ flex: 1 }}>
-                        <label>Player 1 Marker:</label>
-                        <select value={p1Mark} onChange={(e) => setP1Mark(e.target.value)} disabled={isSearching}>
-                            {AVAILABLE_MARKERS.map(m => <option key={`p1-${m}`} value={m}>{m}</option>)}
-                        </select>
-                    </div>
-                    <div style={{ flex: 1 }}>
-                        <label>Player 2 / Bot Marker:</label>
-                        <select value={p2Mark} onChange={(e) => setP2Mark(e.target.value)} disabled={isSearching}>
-                            {AVAILABLE_MARKERS.map(m => <option key={`p2-${m}`} value={m}>{m}</option>)}
-                        </select>
-                    </div>
-                </div>
-
-                {isSearching ? (
-                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                        <div className="spinner" style={{ margin: '0 auto 10px', width: '30px', height: '30px', border: '3px solid #f3f3f3', borderTop: '3px solid #4CAF50', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
-                        <p style={{ color: '#4CAF50', fontWeight: 'bold' }}>Searching for an opponent...</p>
-                    </div>
-                ) : (
-                    <button 
-                        className="start-btn" 
-                        style={{ backgroundColor: selectedMode === 'Online' ? '#4CAF50' : '' }}
-                        onClick={() => {
-                            if (selectedMode === 'Online') {
-                                onStartOnline(); // Tell GamePage to dial the server!
-                            } else {
-                                startGame(selectedSize, selectedStyle, p1Mark, p2Mark, selectedMode, selectedDiff);
-                            }
-                        }}
-                        disabled={p1Mark === p2Mark}
-                    >
-                        {p1Mark === p2Mark ? "Select different markers!" : (selectedMode === 'Online' ? "🌍 Find Online Match" : "Enter Arena")}
-                    </button>
-                )}
+                </Card>
             </div>
         );
     }
 
-    const colLabels = Array.from({ length: boardSize }, (_, i) => String.fromCharCode(97 + i));
 
+    if (gameMode === 'Online Multiplayer') {
+        console.log("Here is the matchData:", matchData);
+    }
+    
+    const colLabels = Array.from({ length: boardSize }, (_, i) => String.fromCharCode(97 + i));
+    
     return (
         <div className={`game-container ${boardStyle}`}>
             <div className="game-header">
@@ -139,32 +175,46 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                 </button>
             </div>
 
-            <div className="board-wrapper">
-                <div className="y-axis">
-                    {board.map((_, rowIndex) => (
-                        <div key={`y-${rowIndex}`} className="coord-label">{boardSize - rowIndex}</div>
-                    ))}
+        <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', alignItems: 'flex-start', flexWrap: 'wrap', width: '100%' }}>
+                
+                <div className="board-wrapper">
+                    <div className="y-axis">
+                        {board.map((_, rowIndex) => (
+                            <div key={`y-${rowIndex}`} className="coord-label">{boardSize - rowIndex}</div>
+                        ))}
+                    </div>
+
+                    <div>
+                        <div className="board-grid" style={{ gridTemplateColumns: `repeat(${boardSize}, 40px)`, gridTemplateRows: `repeat(${boardSize}, 40px)` }}>
+                            {board.map((row, rowIndex) => (
+                                row.map((cell, colIndex) => (
+                                    <div key={`${rowIndex}-${colIndex}`} className={`board-cell ${cell ? 'taken' : ''}`} onClick={() => handleCellClick(rowIndex, colIndex)}>
+                                        {cell}
+                                    </div>
+                                ))
+                            ))}
+                        </div>
+                        <div className="x-axis" style={{ gridTemplateColumns: `repeat(${boardSize}, 40px)` }}>
+                            {colLabels.map(letter => (
+                                <div key={`x-${letter}`} className="coord-label">{letter}</div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <div className="board-grid" style={{ gridTemplateColumns: `repeat(${boardSize}, 40px)`, gridTemplateRows: `repeat(${boardSize}, 40px)` }}>
-                        {board.map((row, rowIndex) => (
-                            row.map((cell, colIndex) => (
-                                <div key={`${rowIndex}-${colIndex}`} className={`board-cell ${cell ? 'taken' : ''}`} onClick={() => handleCellClick(rowIndex, colIndex)}>
-                                    {cell}
-                                </div>
-                            ))
-                        ))}
+                {gameMode === 'Online Multiplayer' && matchData && (
+                    <div style={{ width: '100%', maxWidth: '350px' }}>
+                        <ChatBox 
+                            socket={socket} 
+                            roomId={matchData.room || matchData.roomId || matchData.id} 
+                            currentUser={profileData?.username || 'You'} 
+                        />
                     </div>
-                    <div className="x-axis" style={{ gridTemplateColumns: `repeat(${boardSize}, 40px)` }}>
-                        {colLabels.map(letter => (
-                            <div key={`x-${letter}`} className="coord-label">{letter}</div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+                )}
+                
+            </div> 
+
         </div>
     );
 };
-
 export default GameBoard;

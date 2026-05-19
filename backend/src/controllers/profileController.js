@@ -2,6 +2,9 @@
 import User from '../models/User.js';
 import Match from '../models/Match.js';
 import bcrypt from 'bcryptjs';
+import sharp from 'sharp';
+import path from 'path';
+import fs from 'fs';
 
 export const profileController = {
     
@@ -58,9 +61,25 @@ export const profileController = {
                 user.password = await bcrypt.hash(req.body.password, salt);
             }
 
-            // Save the new logo URL if a file was uploaded
+            // Handle logo upload if a file was sent
             if (req.file) {
-                user.logoUrl = `http://localhost:5000/uploads/${req.file.filename}`;
+                const uploadDir = 'uploads/';
+                if (!fs.existsSync(uploadDir)) {
+                    fs.mkdirSync(uploadDir, { recursive: true });
+                }
+                const filename = `${req.user._id}-${Date.now()}.webp`;
+                const outputPath = path.join(uploadDir, filename);
+                
+                await sharp(req.file.buffer)
+                    .resize(250, 250, {
+                        fit: sharp.fit.cover, 
+                        position: sharp.strategy.entropy 
+                    })
+                    .toFormat('webp')
+                    .webp({ quality: 80 })
+                    .toFile(outputPath);
+
+                user.logoUrl = `http://localhost:5000/uploads/${filename}`;
             }
 
             const updatedUser = await user.save();
@@ -68,6 +87,7 @@ export const profileController = {
             res.status(200).json(updatedUser);
             
         } catch (error) {
+            console.error("Profile Update Error:", error);
             res.status(500).json({ message: error.message });
         }
     }

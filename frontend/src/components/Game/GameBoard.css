@@ -1,12 +1,15 @@
 /* src/components/Game/GameBoard.css */
 
 .game-setup-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    max-width: 400px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 600px; 
+    margin: 40px auto; 
+}
+.setup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    margin-bottom: 25px;
 }
 
 .setup-group {
@@ -41,6 +44,12 @@
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    margin-top: 10px;
+}
+
+.start-btn-container {
+    display: flex;
+    justify-content: center;
     margin-top: 10px;
 }
 
@@ -198,3 +207,10 @@
 @keyframes blink {
     50% { opacity: 0.5; }
 }
+
+@media (max-width: 600px) {
+    .setup-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

@@ -3,60 +3,83 @@ import React from 'react';
 import './RegisterForm.css';
 import { useRegisterForm } from '../../hooks/useRegisterForm'; 
 import { Link } from 'react-router-dom';
+import { Card } from '../common/Card';
+import { Input } from '../common/Input';
+import { Select } from '../common/Select';
+import { Button } from '../common/Button';
 
 const RegisterForm = () => {
     const { formData, errors, apiError, isLoading, handleChange, handleSubmit } = useRegisterForm();
 
+    const countryOptions = [
+        { label: 'Vietnam', value: 'VN' },
+        { label: 'United States', value: 'US' },
+        { label: 'United Kingdom', value: 'UK' }
+    ];
+
     return (
-        <div className="register-form-container">
-            <h2>Create an Account</h2>
+        <Card title="Create an Account" className="register-form-container card-sm">
             {apiError && <div className="error-banner" style={{ marginBottom: '15px' }}>{apiError}</div>}
-            <form onSubmit={handleSubmit} className="register-form">
-                
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
-                    {errors.username && <span className="error-text">{errors.username}</span>}
-                </div>
+            
+            <form onSubmit={handleSubmit}>
+                <Input 
+                    label="Username" 
+                    name="username" 
+                    value={formData.username} 
+                    onChange={handleChange} 
+                    error={errors.username}
+                    required 
+                />
 
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-                    {errors.email && <span className="error-text">{errors.email}</span>}
-                </div>
+                <Input 
+                    label="Email" 
+                    type="email" 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                    error={errors.email}
+                    required 
+                />
 
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
-                    {errors.password && <span className="error-text">{errors.password}</span>}
-                </div>
+                <Input 
+                    label="Password" 
+                    type="password" 
+                    name="password" 
+                    value={formData.password} 
+                    onChange={handleChange} 
+                    error={errors.password}
+                    required 
+                />
 
-                <div className="form-group">
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
-                    {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
-                </div>
+                <Input 
+                    label="Confirm Password" 
+                    type="password" 
+                    name="confirmPassword" 
+                    value={formData.confirmPassword} 
+                    onChange={handleChange} 
+                    error={errors.confirmPassword}
+                    required 
+                />
 
-                <div className="form-group">
-                    <label htmlFor="country">Country</label>
-                    <select id="country" name="country" value={formData.country} onChange={handleChange} required>
-                        <option value="">Select a country</option>
-                        <option value="VN">Vietnam</option>
-                        <option value="US">United States</option>
-                        <option value="UK">United Kingdom</option>
-                    </select>
-                </div>
+                <Select 
+                    label="Country" 
+                    name="country" 
+                    value={formData.country} 
+                    onChange={handleChange} 
+                    options={countryOptions}
+                    required 
+                />
 
-                <button type="submit" className="submit-btn" disabled={isLoading}>
+                <Button type="submit" variant="primary" disabled={isLoading}>
                     {isLoading ? 'Creating Account...' : 'Register'}
-                 </button>
+                </Button>
             </form>
+
             <div className="auth-footer" style={{ textAlign: 'center', marginTop: '20px' }}>
-                <p>Already have an account? <Link to="/" className="text-link" style={{ color: 'var(--secondary-color)', fontWeight: '500' }}>Login here</Link></p>
+                <p>Already have an account? <Link to="/" className="text-link" style={{ color: '#2196F3', fontWeight: '500' }}>Login here</Link></p>
             </div>
-        </div>
+        </Card>
     );
 };
-
 
 export default RegisterForm;
