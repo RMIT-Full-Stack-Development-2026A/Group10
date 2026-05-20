@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import GamePage from './pages/GamePage'; 
-import AdminDashboard from './pages/./Admin/AdminDashboard';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (

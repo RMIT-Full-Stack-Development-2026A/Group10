@@ -1,15 +1,12 @@
 /* src/components/Game/GameBoard.css */
 
 .game-setup-container {
-    width: 100%;
-    max-width: 600px; 
-    margin: 40px auto; 
-}
-.setup-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 20px; 
-    margin-bottom: 25px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .setup-group {
@@ -47,12 +44,6 @@
     margin-top: 10px;
 }
 
-.start-btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
 .start-btn:disabled {
     background-color: #999;
     cursor: not-allowed;
@@ -75,12 +66,13 @@
     width: 100%; 
 }
 
-.p1-turn { 
-    color: #e53935; 
+.p1-turn {
+    color: #1e88e5;
 }
 
 .p2-turn { 
-    color: #1e88e5; 
+
+    color: #e53935;
 }
 
 .winner-text { 
@@ -107,12 +99,13 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 25px; 
+    padding-bottom: 50px;
 }
 
 .x-axis {
     display: grid;
     margin-top: 10px;
+
 }
 
 .coord-label {
@@ -207,10 +200,3 @@
 @keyframes blink {
     50% { opacity: 0.5; }
 }
-
-@media (max-width: 600px) {
-    .setup-grid {
-        grid-template-columns: 1fr;
-    }
-}
-

@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { paymentService } from '../../services/paymentService';
 import { profileService } from '../../services/profileService';
-import { Card } from '../common/Card';
-import { Input } from '../common/Input';
-import { Button } from '../common/Button';
 
 const PremiumUpgrade = () => {
     const [balance, setBalance] = useState(0);
@@ -23,12 +20,13 @@ const PremiumUpgrade = () => {
         };
         loadProfile();
 
+        // Check if we just came back from a successful Stripe payment
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('success')) {
             setMessage('Stripe Payment Successful! You are now Premium.');
             setIsSuccess(true);
             setIsPremium(true);
-            window.history.replaceState(null, '', window.location.pathname);
+            window.history.replaceState(null, '', window.location.pathname); // Clean up the URL
         }
         if (urlParams.get('canceled')) {
             setMessage('Stripe Payment Canceled.');
@@ -64,9 +62,11 @@ const PremiumUpgrade = () => {
         }
     };
 
+    // Handle the Stripe click
     const handleStripeCheckout = async () => {
         const response = await paymentService.createStripeCheckout();
         if (response.status === 200 && response.data?.url) {
+            // Redirect the user completely to Stripe's secure page
             window.location.href = response.data.url;
         } else {
             setMessage(response.data?.message || 'Failed to initialize Stripe.');
@@ -75,7 +75,11 @@ const PremiumUpgrade = () => {
     };
 
     return (
-        <Card title="Premium Subscription" className="premium-card card-lg">
+        <div style={{ backgroundColor: '#fff', padding: '30px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
+            <h3 style={{ marginBottom: '20px', color: '#4CAF50', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>
+                Premium Subscription
+            </h3>
+            
             <div style={{ display: 'flex', gap: '40px', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div style={{ flex: 1, backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', textAlign: 'center', border: '1px solid #e0e0e0' }}>
                     <h4 style={{ margin: '0 0 10px 0', color: '#555' }}>Local Wallet Balance</h4>
@@ -94,27 +98,25 @@ const PremiumUpgrade = () => {
 
                     {!isPremium ? (
                         <>
-                            <form onSubmit={handleDeposit} style={{ display: 'flex', gap: '10px', marginBottom: '20px', alignItems: 'flex-start' }}>
-                                <div style={{ flex: 1 }}>
-                                    <Input 
-                                        type="number" min="1" placeholder="Amount to deposit ($)" 
-                                        value={depositAmount} onChange={(e) => setDepositAmount(e.target.value)} required
-                                    />
-                                </div>
-                                <div style={{ width: '150px' }}>
-                                    <Button type="submit" variant="secondary">Deposit</Button>
-                                </div>
+                            <form onSubmit={handleDeposit} style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+                                <input 
+                                    type="number" min="1" placeholder="Amount to deposit ($)" 
+                                    value={depositAmount} onChange={(e) => setDepositAmount(e.target.value)}
+                                    style={{ flex: 1, padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }} required
+                                />
+                                <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#2196F3', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                                    Deposit Funds
+                                </button>
                             </form>
 
                             <div style={{ display: 'flex', gap: '10px' }}>
-                                <Button onClick={handleSubscribe} variant="primary">
+                                <button onClick={handleSubscribe} style={{ flex: 1, padding: '15px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', fontSize: '16px', cursor: 'pointer', fontWeight: 'bold' }}>
                                     Pay with Wallet ($10)
-                                </Button>
+                                </button>
                                 
-                                {/* We can override our standard button background for Stripe's distinct purple color */}
-                                <Button onClick={handleStripeCheckout} style={{ backgroundColor: '#635BFF', color: 'white' }}>
+                                <button onClick={handleStripeCheckout} style={{ flex: 1, padding: '15px', backgroundColor: '#635BFF', color: 'white', border: 'none', borderRadius: '4px', fontSize: '16px', cursor: 'pointer', fontWeight: 'bold' }}>
                                     💳 Pay with Stripe
-                                </Button>
+                                </button>
                             </div>
                         </>
                     ) : (
@@ -125,7 +127,7 @@ const PremiumUpgrade = () => {
                     )}
                 </div>
             </div>
-        </Card>
+        </div>
     );
 };
 

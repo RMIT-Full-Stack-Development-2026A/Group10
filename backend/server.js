@@ -102,37 +102,6 @@ io.on('connection', (socket) => {
         socket.to(data.room).emit('opponentMove', data);
     });
 
-
-    socket.on('sendMessage', (data) => {
-            io.to(data.room).emit('receiveMessage', {
-                sender: data.sender,
-                message: data.message,
-                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            });
-        });
-
-    socket.on('getAdminRooms', () => {
-        const activeRooms = Array.from(io.sockets.adapter.rooms.entries())
-            .filter(([roomId, clients]) => !clients.has(roomId)) 
-            .map(([roomId, clients]) => ({
-                roomId: roomId,
-                playerCount: clients.size
-            }));
-        
-        socket.emit('adminRoomsList', activeRooms);
-    });
-
-    socket.on('forceCloseRoom', (roomId) => {
-        io.to(roomId).emit('gameTerminatedByAdmin', "This match has been terminated by an Administrator.");
-        io.in(roomId).socketsLeave(roomId);
-        
-        
-        const activeRooms = Array.from(io.sockets.adapter.rooms.entries())
-            .filter(([id, clients]) => !clients.has(id))
-            .map(([id, clients]) => ({ roomId: id, playerCount: clients.size }));
-        socket.emit('adminRoomsList', activeRooms);
-    });
-
     socket.on('disconnecting', () => {
         for (const room of socket.rooms) {
             if (room.startsWith('room_')) {
