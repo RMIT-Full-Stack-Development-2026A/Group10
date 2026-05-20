@@ -19,19 +19,19 @@ const LoginPage = () => {
         <div className="w-screen h-dvh flex justify-center items-center relative overflow-hidden">
             <FontAwesomeIcon
                 icon={faXmark}
-                className="absolute top-[20vh] left-[10vw] text-pink text-[30vh] opacity-20 rotate-25"
+                className="absolute top-[20vh] left-[10vw] text-red text-[30vh] opacity-20 rotate-25"
             />
 
             <FontAwesomeIcon
                 icon={faO}
-                className="absolute top-[55vh] left-[65vw] text-yellow text-[40vh] opacity-50 rotate-25"
+                className="absolute top-[55vh] left-[65vw] text-blue text-[40vh] opacity-50 rotate-25"
             />
 
             <div className="w-2/5 z-10 px-[3vh] py-[3vh] bg-background rounded-[1vw] flex flex-col items-center gap-[3vh] border border-pink">
 
                 <div className="w-full flex flex-col gap-[1vh]">
-                    <p className="text-[3vh] text-pink font-bold uppercase text-center">
-                        <FontAwesomeIcon icon={faGamepad} /> Neon Arena
+                    <p className="text-[3vh] text-blue font-bold uppercase text-center">
+                        <FontAwesomeIcon icon={faGamepad} /> TicTacToang
                     </p>
 
                     <p className="text-[1.5vh] text-smoke-text text-center">
@@ -72,7 +72,7 @@ const LoginPage = () => {
 
                 <p className="text-[1.5vh] text-smoke-text">
                     Don&apos;t have an account?{' '}
-                    <Link to="/register" className="text-pink hoverable:hover:underline">
+                    <Link to="/register" className="text-blue hoverable:hover:underline">
                         Register here
                     </Link>
                 </p>

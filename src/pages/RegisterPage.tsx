@@ -29,18 +29,18 @@ const RegisterPage = () => {
         <div className="w-screen h-dvh flex justify-center items-center relative overflow-hidden">
             <FontAwesomeIcon
                 icon={faXmark}
-                className="absolute flex portrait:hidden portrait:opacity-0 top-[20vh] left-[10vw] text-pink text-[30vh] opacity-20 rotate-25"
+                className="absolute flex portrait:hidden portrait:opacity-0 top-[20vh] left-[10vw] text-red text-[30vh] opacity-20 rotate-25"
             />
 
             <FontAwesomeIcon
                 icon={faO}
-                className="absolute flex portrait:hidden portrait:opacity-0 top-[55vh] left-[65vw] text-yellow text-[40vh] opacity-50 rotate-25"
+                className="absolute flex portrait:hidden portrait:opacity-0 top-[55vh] left-[65vw] text-blue text-[40vh] opacity-50 rotate-25"
             />
 
             <div className="w-2/5 z-10 px-[3vh] py-[3vh] portrait:px-[5vh] portrait:py-0 bg-background portrait:bg-transparent portrait:w-full portrait:border-0 rounded-[1vw] flex flex-col items-center gap-[3vh] portrait:gap-[4vh] border border-pink">
                 <div className="w-full flex flex-col gap-[1vh]">
-                    <p className="text-[3vh] text-pink font-bold uppercase w-full text-center">
-                        <FontAwesomeIcon icon={faGamepad} /> Neon Arena
+                    <p className="text-[3vh] text-blue font-bold uppercase w-full text-center">
+                        <FontAwesomeIcon icon={faGamepad} /> TicTacToang
                     </p>
 
                     <p className="text-[1.5vh] text-smoke-text w-full text-center">

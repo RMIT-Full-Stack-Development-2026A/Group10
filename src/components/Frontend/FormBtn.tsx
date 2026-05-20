@@ -17,7 +17,7 @@ const FormBtn: React.FC<FormBtnProps> = ({
         w-full py-[1vh]
         text-[1.8vh] uppercase font-bold
         text-dark-purple
-        bg-linear-165 from-purple to-pink
+        bg-linear-165 from-purple to-blue
         rounded-[1vh]
         cursor-pointer
         transition-all

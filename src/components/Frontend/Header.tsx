@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header = ({
                     onMenuClick,
-                    title = 'Neon Arena',
+                    title = 'TicTacToang',
                 }: HeaderProps) => {
     return (
         <div className="w-full h-[10vh] bg-dark-bg flex justify-center items-center relative">
