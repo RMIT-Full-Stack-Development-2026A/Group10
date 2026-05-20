@@ -1,0 +1,22 @@
+/* src/index.css */
+:root {
+  --primary-color: #2a74ff;
+  --secondary-color: #ff0000;
+  --background-color: #f4f4f9;
+  --text-color: #333;
+  --error-color: #f44336;
+  --border-radius: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}

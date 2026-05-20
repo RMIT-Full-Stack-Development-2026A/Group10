@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Environment Variables (Keep secrets safe!)
+.env
+
+# User Uploads (Ignore test images)
+uploads/
+
+# Build files
+dist/
+build/
