@@ -7,7 +7,7 @@ const AVAILABLE_MARKERS = ['❌', '⭕', '⚔️', '🛡️', '🚀', '🌟'];
 
 const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
     const { 
-        gameStarted, startGame, boardSize, boardStyle,
+        gameStarted, startGame, boardSize, setBoardSize, boardStyle,
         board, isPlayerOneTurn, winner, handleCellClick, resetGame, 
         playerOneMarker, playerTwoMarker, gameMode 
     } = useGameLogic(matchData);
@@ -54,18 +54,48 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                 <div className="setup-group flex-row">
                     <div style={{ flex: 1 }}>
                         <label>Board Size:</label>
-                        <select value={selectedSize} onChange={(e) => setSelectedSize(Number(e.target.value))} disabled={isSearching}>
-                            <option value={10}>10 x 10</option>
-                            <option value={15}>15 x 15</option>
-                        </select>
+                        <div className="size-btn-container">
+                            <button
+                                type="button"
+                                onClick={() => setBoardSize('10x10')}
+                                className={`size-btn btn-10x10 ${boardSize === '10x10' ? 'active' : ''}`}
+                            >
+                                10x10
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setBoardSize('15x15')}
+                                className={`size-btn btn-15x15 ${boardSize === '15x15' ? 'active' : ''}`}
+                            >
+                                15x15
+                            </button>
+                        </div>
                     </div>
                     <div style={{ flex: 1 }}>
                         <label>Board Style:</label>
-                        <select value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)} disabled={isSearching}>
-                            <option value="style-classic">Classic</option>
-                            <option value="style-dark">Neon Dark</option>
-                            <option value="style-wood">Wooden</option>
-                        </select>
+                        <div className="style-btn-container">
+                            <button
+                                type="button"
+                                onClick={() => setBoardStyle('Light')}
+                                className={`size-btn btn-light ${boardStyle === 'light' ? 'active' : ''}`}
+                            >
+                                Classic Light
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setBoardStyle('Dark')}
+                                className={`size-btn btn-dark ${boardStyle === 'dark' ? 'active' : ''}`}
+                            >
+                                Neon Dark
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setBoardStyle('Wooden')}
+                                className={`size-btn btn-wooden ${boardStyle === 'wooden' ? 'active' : ''}`}
+                            >
+                                Wooden
+                            </button>
+                        </div>
                     </div>
                 </div>
 

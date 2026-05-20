@@ -48,18 +48,15 @@
 
 .submit-btn {
     width: 100%;
-    padding: 10px;
-    background-color: var(--reg-blue);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-    background-color: var(--reg-red);
+    height: 6vh;
+    margin-top: 1vh;
+    background-color: transparent;
+    border: 2px solid var(--reg-blue);
+    color: var(--reg-blue);
+    font-size: 2vh;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 1vh;
 }
 
 .error-text {
@@ -77,7 +74,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    background-color: var(--reg-bg);
+    background-color: gray;
     font-family: sans-serif;
     padding: 2vh 0;
 }
@@ -186,7 +183,7 @@
 
 .register-wrapper .input-label {
     font-size: 1.5vh;
-    color: var(--reg-smoke);
+    color: black;
     text-transform: uppercase;
     font-weight: bold;
 }
@@ -194,11 +191,11 @@
 .register-wrapper .input-field {
     width: 100%;
     padding: 1vh 2vw;
-    background-color: var(--reg-dark);
+    background-color: var(--reg-bg);
     height: 5vh;
     border-radius: 1vh;
-    border: 1px solid transparent;
-    color: var(--reg-white);
+    border: 1px solid ;
+    color: black;
     font-size: 1.8vh;
     outline: none;
     box-sizing: border-box;
@@ -244,9 +241,9 @@
     transition: all 0.2s ease;
 }
 
-.register-wrapper .submit-btn:hover:not(:disabled) {
-    background-color: var(--reg-blue);
-    color: var(--reg-white);
+.submit-btn:hover:not(:disabled) {
+    background-color: var(--login-blue);
+    color: var(--login-white);
 }
 
 .register-wrapper .submit-btn:disabled {
