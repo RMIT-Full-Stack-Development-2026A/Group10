@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './LoginForm.css';
 import { useLoginForm } from '../../hooks/useLoginForm';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { faGamepad, faXmark, faO } from '@fortawesome/free-solid-svg-icons';
 
 const LoginForm = () => {
     const { credentials, error, isLoading, handleChange, handleSubmit } = useLoginForm();
+    const [showPassword, setShowPassword] = useState(false);
 
     return (
         <div className="login-wrapper">
@@ -36,12 +37,14 @@ const LoginForm = () => {
                             placeholder="Enter username or email"
                             className="input-field"
                         />
+
                     </div>
 
                     <div className="input-group">
                         <label htmlFor="password" className="input-label">Password</label>
+                        <div className="password-field">
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             id="password"
                             name="password"
                             value={credentials.password}
@@ -50,7 +53,14 @@ const LoginForm = () => {
                             placeholder="Enter your password"
                             className="input-field"
                         />
-
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="password-toggle-btn"
+                            >
+                                {showPassword ? 'Hide' : 'Show'}
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" className="submit-btn" disabled={isLoading}>

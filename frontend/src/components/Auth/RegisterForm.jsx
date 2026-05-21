@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './RegisterForm.css';
 import { useRegisterForm } from '../../hooks/useRegisterForm';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,7 @@ const countries = [
 
 const RegisterForm = () => {
     const { formData, errors, apiError, isLoading, handleChange, handleSubmit } = useRegisterForm();
+    const [showPassword, setShowPassword] = useState(false);
 
     return (
         <div className="register-wrapper">
@@ -83,8 +84,9 @@ const RegisterForm = () => {
                     <div className="password-row">
                         <div className="input-group">
                             <label htmlFor="password" className="input-label">Password</label>
+                            <div className="password-field">
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 id="password"
                                 name="password"
                                 value={formData.password}
@@ -93,6 +95,14 @@ const RegisterForm = () => {
                                 className={`input-field ${errors.password ? 'input-error' : ''}`}
                                 required
                             />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="password-toggle-btn"
+                                >
+                                    {showPassword ? 'Hide' : 'Show'}
+                                </button>
+                            </div>
                             {errors.password && <span className="error-text">{errors.password}</span>}
                         </div>
 
