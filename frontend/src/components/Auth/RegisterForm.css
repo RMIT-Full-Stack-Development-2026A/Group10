@@ -66,6 +66,12 @@
     margin-top: 5px;
 }
 
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
 .register-wrapper {
     width: 100vw;
     min-height: 100dvh;
@@ -251,7 +257,7 @@
     cursor: not-allowed;
 }
 
-.register-wrapper .auth-footer p {
+.auth-footer p {
     font-size: 1.5vh;
     color: var(--reg-smoke);
     margin: 0;

@@ -368,7 +368,7 @@
         cursor: not-allowed;
     }
 
-    .login-wrapper .auth-footer p {
+    .auth-footer p {
         font-size: 1.5vh;
         color: var(--login-smoke);
         margin: 0;

@@ -10,6 +10,7 @@ export const Input = ({
     placeholder, 
     error 
 }) => {
+
     return (
         <div className="input-group">
             {label && <label htmlFor={name} className="input-label">{label}</label>}

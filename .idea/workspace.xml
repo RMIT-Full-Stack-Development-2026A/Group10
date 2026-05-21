@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09f2744c-cfec-4920-bd14-ff88a250e993" name="Changes" comment="" />
+    <list default="true" id="09f2744c-cfec-4920-bd14-ff88a250e993" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Game/GameBoard.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Game/GameBoard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Game/GameBoard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Game/GameBoard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/Input.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/Input.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ProfilePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/ProfilePage.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -23,9 +36,11 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev-Quan&quot;,
     &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/run/media/system/Data/Group10-dev-BH&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/run/media/system/Data/Group10-dev-Quan/Group10&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -58,6 +73,12 @@
       <workItem from="1779258987539" duration="1682000" />
       <workItem from="1779265108229" duration="1555000" />
       <workItem from="1779274888963" duration="1445000" />
+      <workItem from="1779276868049" duration="6672000" />
+      <workItem from="1779287558850" duration="1297000" />
+      <workItem from="1779335231873" duration="1524000" />
+      <workItem from="1779346438866" duration="624000" />
+      <workItem from="1779348565437" duration="2142000" />
+      <workItem from="1779361295547" duration="5933000" />
     </task>
     <servers />
   </component>
