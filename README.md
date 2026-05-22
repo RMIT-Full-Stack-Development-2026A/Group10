@@ -62,3 +62,12 @@ To test the real-time WebSockets locally:
     Open a new Incognito/Private window and log in with a different test account.
     On both windows, navigate to the Game Menu and select Play Online.
     The server will automatically pair the two windows into a private room!
+    
+    ```
+    
+### Group Contribution
+| Member Name | Role | Assigned Tasks | Contribution Score |
+| :--- | :--- | :--- | :--- |
+| Tran Nguyen Quan | Backend | Database setup, APIs, game logic | 5 |
+| Nguyen Bao Hoang | Frontend | UI/UX, connections, game board, game history, payment | 5 |
+
