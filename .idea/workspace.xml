@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="09f2744c-cfec-4920-bd14-ff88a250e993" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/LoginForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Auth/RegisterForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/common/Input.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/common/Input.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +70,8 @@
       <workItem from="1779335231873" duration="1524000" />
       <workItem from="1779346438866" duration="624000" />
       <workItem from="1779348565437" duration="2142000" />
-      <workItem from="1779361295547" duration="7811000" />
+      <workItem from="1779361295547" duration="7887000" />
+      <workItem from="1779414615521" duration="481000" />
     </task>
     <servers />
   </component>
