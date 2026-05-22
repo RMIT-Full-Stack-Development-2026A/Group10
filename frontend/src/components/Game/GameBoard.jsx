@@ -7,12 +7,11 @@ const AVAILABLE_MARKERS = ['❌', '⭕', '⚔️', '🛡️', '🚀', '🌟'];
 const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
     const { 
         gameStarted, startGame, boardSize, setBoardSize, boardStyle, setBoardStyle,
-        board, isPlayerOneTurn, winner, handleCellClick, resetGame, 
-        playerOneMarker, playerTwoMarker, gameMode 
+        board, isPlayerOneTurn, winner, handleCellClick, resetGame,
+        playerOneMarker, playerTwoMarker, gameMode
     } = useGameLogic(matchData);
-    
-    const [selectedSize, setSelectedSize] = useState(10);
-    const [selectedStyle, setSelectedStyle] = useState('btn-light');
+
+    const activeSize = boardSize === '15x15' ? 15 : 10;
     const [p1Mark, setP1Mark] = useState('⚔️');
     const [p2Mark, setP2Mark] = useState('🛡️');
     const [selectedMode, setSelectedMode] = useState('Single Player');
@@ -20,15 +19,15 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
 
     useEffect(() => {
         if (matchData) {
-            startGame(selectedSize, selectedStyle, p1Mark, p2Mark, 'Online Multiplayer', null);
+            startGame(activeSize, boardStyle, p1Mark, p2Mark, 'Online Multiplayer', null);
         }
-    }, [matchData]); 
+    }, [matchData]);
 
     if (!gameStarted) {
         return (
             <div className="game-setup-container">
                 <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Match Setup</h2>
-                
+
                 <div className="setup-group flex-row">
                     <div style={{ flex: 1 }}>
                         <label>Game Mode:</label>
@@ -57,14 +56,14 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                             <button
                                 type="button"
                                 onClick={() => setBoardSize('10x10')}
-                                className={`size-btn btn-10x10 ${boardSize === '10x10' ? 'active' : ''}`}
+                                className={`size-btn btn-10x10 ${activeSize === 10 ? 'active' : ''}`}
                             >
                                 10x10
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setBoardSize('15x15')}
-                                className={`size-btn btn-15x15 ${boardSize === '15x15' ? 'active' : ''}`}
+                                className={`size-btn btn-15x15 ${activeSize === 15 ? 'active' : ''}`}
                             >
                                 15x15
                             </button>
@@ -76,21 +75,21 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                             <button
                                 type="button"
                                 onClick={() => setBoardStyle('btn-light')}
-                                className={`size-btn btn-light ${boardStyle === 'btn-light' ? 'active' : ''}`}
+                                className={`style-btn btn-light ${boardStyle === 'btn-light' ? 'active' : ''}`}
                             >
                                 Classic Light
                             </button>
                             <button
                                 type="button"
-                                onClick={() => setBoardStyle('btn-light')}
-                                className={`size-btn btn-dark ${boardStyle === 'btn-dark' ? 'active' : ''}`}
+                                onClick={() => setBoardStyle('btn-dark')}
+                                className={`style-btn btn-dark ${boardStyle === 'btn-dark' ? 'active' : ''}`}
                             >
                                 Neon Dark
                             </button>
                             <button
                                 type="button"
-                                onClick={() => setBoardStyle('btn-light')}
-                                className={`size-btn btn-wooden ${boardStyle === 'btn-wooden' ? 'active' : ''}`}
+                                onClick={() => setBoardStyle('btn-wooden')}
+                                className={`style-btn btn-wooden ${boardStyle === 'btn-wooden' ? 'active' : ''}`}
                             >
                                 Wooden
                             </button>
@@ -119,14 +118,14 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                         <p style={{ color: '#4CAF50', fontWeight: 'bold' }}>Searching for an opponent...</p>
                     </div>
                 ) : (
-                    <button 
-                        className="start-btn" 
+                    <button
+                        className="start-btn"
                         style={{ backgroundColor: selectedMode === 'Online' ? '#4CAF50' : '' }}
                         onClick={() => {
                             if (selectedMode === 'Online') {
                                 onStartOnline(); // Tell GamePage to dial the server!
                             } else {
-                                startGame(selectedSize, selectedStyle, p1Mark, p2Mark, selectedMode, selectedDiff);
+                                startGame(activeSize, boardStyle, p1Mark, p2Mark, selectedMode, selectedDiff);
                             }
                         }}
                         disabled={p1Mark === p2Mark}
@@ -138,7 +137,7 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
         );
     }
 
-    const colLabels = Array.from({ length: boardSize }, (_, i) => String.fromCharCode(97 + i));
+    const colLabels = Array.from({ length: activeSize }, (_, i) => String.fromCharCode(97 + i));
 
     return (
         <div className={`game-container ${boardStyle}`}>
@@ -161,7 +160,7 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                 <button className="reset-btn" onClick={() => {
                     resetGame();
                     if (gameMode === 'Online Multiplayer') {
-                        window.location.reload(); 
+                        window.location.reload();
                     }
                 }}>
                     End Match / Setup
@@ -171,10 +170,10 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
             <div className="board-wrapper">
                 <div className="y-axis">
                     {board.map((_, rowIndex) => (
-                        <div key={`y-${rowIndex}`} className="coord-label">{boardSize - rowIndex}</div>
+                        <div key={`y-${rowIndex}`} className="coord-label">{activeSize - rowIndex}</div>
                     ))}
                 </div>
-                <div className="board-grid" style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)`, gridTemplateRows: `repeat(${boardSize}, 1fr)` }}>
+                <div className="board-grid" style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)`, gridTemplateRows: `repeat(${activeSize}, 1fr)` }}>
                     {board.map((row, rowIndex) => (
                         row.map((cell, colIndex) => (
                             <div key={`${rowIndex}-${colIndex}`} className={`board-cell ${cell ? 'taken' : ''}`} onClick={() => handleCellClick(rowIndex, colIndex)}>
@@ -185,7 +184,7 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                 </div>
 
             </div>
-            <div className="x-axis" style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)` }}>
+            <div className="x-axis" style={{ gridTemplateColumns: `repeat(${activeSize}, 1fr)` }}>
                 {colLabels.map(letter => (
                     <div key={`x-${letter}`} className="coord-label">{letter}</div>
                 ))}

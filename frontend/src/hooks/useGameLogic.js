@@ -6,11 +6,10 @@ import { socket } from '../services/socketService';
 
 const WIN_CONDITION = 5;
 
-// Accept matchData as a parameter
 export const useGameLogic = (matchData) => {
     const [gameStarted, setGameStarted] = useState(false);
     const [boardSize, setBoardSize] = useState('10x10');
-    const [boardStyle, setBoardStyle] = useState('style-classic');
+    const [boardStyle, setBoardStyle] = useState('btn-light');
     const [playerOneMarker, setPlayerOneMarker] = useState('⚔️');
     const [playerTwoMarker, setPlayerTwoMarker] = useState('🛡️');
     const [gameMode, setGameMode] = useState('Single Player');
