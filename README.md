@@ -63,7 +63,7 @@ To test the real-time WebSockets locally:
     On both windows, navigate to the Game Menu and select Play Online.
     The server will automatically pair the two windows into a private room!
     
-    ```
+```
     
 ### Group Contribution
 | Member Name | Role | Assigned Tasks | Contribution Score |
