@@ -1,0 +1,120 @@
+/* src/components/common/common.css  */
+
+/* Reusable Card */
+.custom-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    margin: 16px auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-sm {
+    max-width: 400px; 
+}
+
+.card-lg {
+    max-width: 800px; 
+}
+
+.card-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333333;
+    text-align: center;
+}
+
+/* Reusable Inputs & Selects */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #555555;
+    font-size: 0.9rem;
+}
+
+.custom-input,
+.custom-select {
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-input:focus,
+.custom-select:focus {
+    outline: none;
+    border-color: #4CAF50; 
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+.input-error {
+    border-color: #f44336; 
+}
+
+.error-text {
+    color: #f44336;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* Reusable Buttons */
+.custom-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.custom-btn:active {
+    transform: scale(0.98);
+}
+
+.custom-btn:disabled {
+    background-color: #cccccc;
+    color: #888888;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Button Variants */
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.btn-danger {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-color: #da190b;
+}
+
+.btn-secondary {
+    background-color: #e0e0e0;
+    color: #333333;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #d5d5d5;
+}

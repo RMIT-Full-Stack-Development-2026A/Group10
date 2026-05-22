@@ -9,7 +9,7 @@ const WIN_CONDITION = 5;
 // Accept matchData as a parameter
 export const useGameLogic = (matchData) => {
     const [gameStarted, setGameStarted] = useState(false);
-    const [boardSize, setBoardSize] = useState(10);
+    const [boardSize, setBoardSize] = useState('10x10');
     const [boardStyle, setBoardStyle] = useState('style-classic');
     const [playerOneMarker, setPlayerOneMarker] = useState('⚔️');
     const [playerTwoMarker, setPlayerTwoMarker] = useState('🛡️');
@@ -116,6 +116,15 @@ export const useGameLogic = (matchData) => {
             });
         }
     };
+    useEffect(() => {
+        const size = boardSize === '15x15' ? 15 : 10;
+
+        // Creates a blank 2D array of size x size filled with null strings
+        const newBoard = Array(size).fill(null).map(() => Array(size).fill(null));
+        setBoard(newBoard);
+
+        // Optional: Reset turns or victory parameters here when switching maps
+    }, [boardSize]);
 
     // Listen for incoming moves from the opponent
     useEffect(() => {
@@ -128,6 +137,7 @@ export const useGameLogic = (matchData) => {
                 saveMatchToHistory(matchData.role);
             }
         };
+
 
         socket.on('opponentMove', handleOpponentMove);
         socket.on('opponentDisconnected', handleOpponentDisconnect);
@@ -154,7 +164,7 @@ export const useGameLogic = (matchData) => {
     const resetGame = () => setGameStarted(false);
 
     return { 
-        gameStarted, startGame, boardSize, boardStyle,
+        gameStarted, startGame, boardSize, setBoardSize, boardStyle, setBoardStyle,
         board, isPlayerOneTurn, winner, handleCellClick, resetGame, 
         playerOneMarker, playerTwoMarker, gameMode 
     };

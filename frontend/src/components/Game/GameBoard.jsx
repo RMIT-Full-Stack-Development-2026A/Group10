@@ -1,4 +1,3 @@
-// src/components/Game/GameBoard.jsx
 import React, { useState, useEffect } from 'react';
 import './GameBoard.css';
 import { useGameLogic } from "../../hooks/useGameLogic";
@@ -7,13 +6,13 @@ const AVAILABLE_MARKERS = ['❌', '⭕', '⚔️', '🛡️', '🚀', '🌟'];
 
 const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
     const { 
-        gameStarted, startGame, boardSize, boardStyle,
+        gameStarted, startGame, boardSize, setBoardSize, boardStyle, setBoardStyle,
         board, isPlayerOneTurn, winner, handleCellClick, resetGame, 
         playerOneMarker, playerTwoMarker, gameMode 
     } = useGameLogic(matchData);
     
     const [selectedSize, setSelectedSize] = useState(10);
-    const [selectedStyle, setSelectedStyle] = useState('style-classic');
+    const [selectedStyle, setSelectedStyle] = useState('btn-light');
     const [p1Mark, setP1Mark] = useState('⚔️');
     const [p2Mark, setP2Mark] = useState('🛡️');
     const [selectedMode, setSelectedMode] = useState('Single Player');
@@ -54,18 +53,48 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                 <div className="setup-group flex-row">
                     <div style={{ flex: 1 }}>
                         <label>Board Size:</label>
-                        <select value={selectedSize} onChange={(e) => setSelectedSize(Number(e.target.value))} disabled={isSearching}>
-                            <option value={10}>10 x 10</option>
-                            <option value={15}>15 x 15</option>
-                        </select>
+                        <div className="size-btn-container">
+                            <button
+                                type="button"
+                                onClick={() => setBoardSize('10x10')}
+                                className={`size-btn btn-10x10 ${boardSize === '10x10' ? 'active' : ''}`}
+                            >
+                                10x10
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setBoardSize('15x15')}
+                                className={`size-btn btn-15x15 ${boardSize === '15x15' ? 'active' : ''}`}
+                            >
+                                15x15
+                            </button>
+                        </div>
                     </div>
                     <div style={{ flex: 1 }}>
                         <label>Board Style:</label>
-                        <select value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)} disabled={isSearching}>
-                            <option value="style-classic">Classic</option>
-                            <option value="style-dark">Neon Dark</option>
-                            <option value="style-wood">Wooden</option>
-                        </select>
+                        <div className="style-btn-container">
+                            <button
+                                type="button"
+                                onClick={() => setBoardStyle('btn-light')}
+                                className={`size-btn btn-light ${boardStyle === 'btn-light' ? 'active' : ''}`}
+                            >
+                                Classic Light
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setBoardStyle('btn-light')}
+                                className={`size-btn btn-dark ${boardStyle === 'btn-dark' ? 'active' : ''}`}
+                            >
+                                Neon Dark
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setBoardStyle('btn-light')}
+                                className={`size-btn btn-wooden ${boardStyle === 'btn-wooden' ? 'active' : ''}`}
+                            >
+                                Wooden
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -145,23 +174,21 @@ const GameBoard = ({ onStartOnline, isSearching, matchData }) => {
                         <div key={`y-${rowIndex}`} className="coord-label">{boardSize - rowIndex}</div>
                     ))}
                 </div>
-
-                <div>
-                    <div className="board-grid" style={{ gridTemplateColumns: `repeat(${boardSize}, 40px)`, gridTemplateRows: `repeat(${boardSize}, 40px)` }}>
-                        {board.map((row, rowIndex) => (
-                            row.map((cell, colIndex) => (
-                                <div key={`${rowIndex}-${colIndex}`} className={`board-cell ${cell ? 'taken' : ''}`} onClick={() => handleCellClick(rowIndex, colIndex)}>
-                                    {cell}
-                                </div>
-                            ))
-                        ))}
-                    </div>
-                    <div className="x-axis" style={{ gridTemplateColumns: `repeat(${boardSize}, 42px)` }}>
-                        {colLabels.map(letter => (
-                            <div key={`x-${letter}`} className="coord-label">{letter}</div>
-                        ))}
-                    </div>
+                <div className="board-grid" style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)`, gridTemplateRows: `repeat(${boardSize}, 1fr)` }}>
+                    {board.map((row, rowIndex) => (
+                        row.map((cell, colIndex) => (
+                            <div key={`${rowIndex}-${colIndex}`} className={`board-cell ${cell ? 'taken' : ''}`} onClick={() => handleCellClick(rowIndex, colIndex)}>
+                                {cell}
+                            </div>
+                        ))
+                    ))}
                 </div>
+
+            </div>
+            <div className="x-axis" style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)` }}>
+                {colLabels.map(letter => (
+                    <div key={`x-${letter}`} className="coord-label">{letter}</div>
+                ))}
             </div>
         </div>
     );

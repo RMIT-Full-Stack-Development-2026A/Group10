@@ -21,17 +21,18 @@ const ProfilePage = () => {
         <div className="page-wrapper" style={{ padding: '40px', maxWidth: '1000px', margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
                 <h1 style={{ margin: 0 }}>Dashboard</h1>
-                
-                {/* Button Container */}
                 <div>
-                    <button 
+                    <button
                         onClick={handlePlayGame}
                         style={{
-                            padding: '8px 16px', backgroundColor: 'var(--primary-color)', color: 'white',
-                            border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', marginRight: '10px'
+                            padding: '16px 32px', backgroundColor: 'var(--primary-color)', color: 'white',
+                            border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', marginRight: '110px'
                         }}>
                         ⚔️ Play Match
                     </button>
+                </div>
+
+                <div>
                     <button 
                         onClick={handleLogout}
                         style={{

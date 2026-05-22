@@ -1,4 +1,21 @@
 /* src/components/Auth/LoginForm.css */
+:root {
+    --login-bg: #f4f4f9;
+    --login-dark: #1a1b23;
+    --login-pink: #ff2a74;
+    --login-blue: #2a74ff;
+    --login-red: #ff0000;
+    --login-smoke: #94a3b8;
+    --login-white: #ffffff;
+    --color-background: #f4f4f9; /* Dark theme background */
+    --color-dark-bg: #1a1b23;    /* Input background */
+    --color-pink: #ff2a74;
+    --color-blue: #2a74ff;
+    --color-red: #ff2a2a;
+    --color-smoke-text: #94a3b8;
+    --color-white: #ffffff;
+}
+
 .auth-form-container {
     background-color: #fff;
     padding: 30px;
@@ -65,42 +82,9 @@
     font-size: 16px; 
 }
 
-.submit-btn { 
-    width: 100%; 
-    padding: 10px; 
-    background-color: var(--primary-color);
-    color: white; border: none; 
-    border-radius: 4px; font-size: 16px; 
-    cursor: pointer; 
-}
-
 .submit-btn:disabled { 
-    background-color: #a5d6a7; 
+    background-color: white;
     cursor: not-allowed; 
-}
-
-.login-wrapper {
-    width: 100vw;
-    height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    background-color: var(--color-background);
-    font-family: sans-serif;
-}
-
-/* src/components/Auth/LoginForm.css */
-
-:root {
-    --color-background: #f4f4f9; /* Dark theme background */
-    --color-dark-bg: #1a1b23;    /* Input background */
-    --color-pink: #ff2a74;
-    --color-blue: #2a74ff;
-    --color-red: #ff2a2a;
-    --color-smoke-text: #94a3b8;
-    --color-white: #ffffff;
 }
 
 /* Page Wrapper */
@@ -112,7 +96,7 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-    background-color: var(--color-background);
+    background-color: gray;
     font-family: sans-serif;
 }
 
@@ -125,7 +109,7 @@
 .bg-icon-x {
     top: 20vh;
     left: 10vw;
-    color: var(--color-red);
+    color: var(--login-red);
     font-size: 30vh;
     opacity: 0.2;
 }
@@ -206,7 +190,7 @@
 
 .input-label {
     font-size: 1.5vh;
-    color: var(--color-smoke-text);
+    color: black;
     text-transform: uppercase;
     font-weight: bold;
 }
@@ -214,11 +198,11 @@
 .input-field {
     width: 100%;
     padding: 1vh 2vw;
-    background-color: var(--color-dark-bg);
+    background-color: var(--color-background);
     height: 5vh;
     border-radius: 1vh;
-    border: 1px solid transparent;
-    color: var(--color-white);
+    border: 1px solid;
+    color: black;
     font-size: 1.8vh;
     outline: none;
     box-sizing: border-box;
@@ -246,17 +230,7 @@
     font-size: 2vh;
     font-weight: bold;
     text-transform: uppercase;
-    border-radius: 1vh;/* src/components/Auth/LoginForm.css */
-
-    :root {
-        --login-bg: #f4f4f9;
-        --login-dark: #1a1b23;
-        --login-pink: #ff2a74;
-        --login-blue: #2a74ff;
-        --login-red: #ff0000;
-        --login-smoke: #94a3b8;
-        --login-white: #ffffff;
-    }
+    border-radius: 1vh;
 
     .login-wrapper {
         width: 100vw;
@@ -334,7 +308,7 @@
         background-color: rgba(239, 68, 68, 0.1);
         padding: 1vh 1vw;
         font-size: 1.5vh;
-        color: #fca5a5;
+        color: var(--color-red);
         box-sizing: border-box;
     }
 
@@ -355,7 +329,7 @@
 
     .login-wrapper .input-label {
         font-size: 1.5vh;
-        color: var(--login-smoke);
+        color: gray;
         text-transform: uppercase;
         font-weight: bold;
     }
@@ -384,21 +358,6 @@
         color: var(--login-smoke);
     }
 
-    .login-wrapper .submit-btn {
-        width: 100%;
-        height: 6vh;
-        margin-top: 1vh;
-        background-color: transparent;
-        border: 2px solid var(--login-blue); /* Kept blue */
-        color: var(--login-blue);
-        font-size: 2vh;
-        font-weight: bold;
-        text-transform: uppercase;
-        border-radius: 1vh;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
     .login-wrapper .submit-btn:hover:not(:disabled) {
         background-color: var(--login-blue);
         color: var(--login-white);
@@ -409,7 +368,7 @@
         cursor: not-allowed;
     }
 
-    .login-wrapper .auth-footer p {
+    .auth-footer p {
         font-size: 1.5vh;
         color: var(--login-smoke);
         margin: 0;
@@ -438,3 +397,28 @@
             display: none;
         }
     }}
+
+.password-field {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-field .input-field {
+    width: 100%;
+    padding-right: 45px;
+    box-sizing: border-box;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
